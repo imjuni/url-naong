@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 module.exports = {
   testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
@@ -8,5 +6,5 @@ module.exports = {
   },
   testMatch: ['**/__tests__/*.(ts|tsx)', '**/__test__/*.(ts|tsx)'],
   testPathIgnorePatterns: ['/node_modules/', '/example/', '/dist/'],
-  setupFilesAfterEnv: ['<rootDir>/.config/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/.configs/jest.setup.cjs'],
 };

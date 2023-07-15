@@ -3,16 +3,6 @@
   "compilerOptions": {
     "allowJs": true
   },
-  "include": [
-    "scripts/uuid.js",
-    "src/**/*",
-    "example/**/*",
-    ".eslintrc.js",
-    "just.config.ts",
-    "jest.config.cjs",
-    "jest.setup.cjs"
-  ],
-  "exclude": [   
-    "dist/**/*"
-  ]
+  "include": ["src/**/*.ts",".eslintrc.cjs", "jest.config.cjs"],
+  "exclude": []
 }
