@@ -2,6 +2,9 @@
   "name": "url-naong",
   "version": "1.1.2",
   "description": "url builder library for javascript, typescript",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "test": "jest --colors --verbose",
     "coverage": "jest --coverage --color --fail-fast --verbose",
