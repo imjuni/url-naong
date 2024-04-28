@@ -2,26 +2,27 @@
   "name": "url-naong",
   "version": "1.1.2",
   "description": "url builder library for javascript, typescript",
+  "packageManager": "pnpm@9.0.4",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "scripts": {
     "test": "jest --colors --verbose",
     "coverage": "jest --coverage --color --fail-fast --verbose",
     "clean": "rimraf dist artifact",
     "clean:dts": "rimraf dist/cjs/src dist/esm/src",
-    "prepub:dev": "npm run rollup:dev",
-    "pub:dev": "npm publish --registry http://localhost:8901 --force",
-    "prepub:prod": "npm run rollup:prod",
-    "pub:prod": "npm publish --registry https://registry.npmjs.org --access=public",
+    "prepub:dev": "pnpm run rollup:dev",
+    "pub:dev": "pnpm publish --registry http://localhost:8901 --force",
+    "prepub:prod": "pnpm run rollup:prod",
+    "pub:prod": "pnpm publish --registry https://registry.npmjs.org --access=public",
     "prebuild": "run-s clean lint",
     "build": "tsc -p tsconfig.json --incremental",
     "prerollup:dev": "run-s clean lint",
     "rollup:dev": "rollup --config .configs/rollup.config.dev.ts --configPlugin typescript",
-    "postrollup:dev": "npm run clean:dts",
+    "postrollup:dev": "pnpm run clean:dts",
     "prerollup:prod": "run-s clean lint",
     "rollup:prod": "rollup --config .configs/rollup.config.prod.ts --configPlugin typescript",
-    "postrollup:prod": "npm run clean:dts",
+    "postrollup:prod": "pnpm run clean:dts",
     "lint": "eslint --cache .",
     "prettier": "prettier --write .",
     "lint-staged": "lint-staged",
@@ -75,7 +76,7 @@
     "@swc/core": "^1.3.69",
     "@swc/helpers": "^0.5.1",
     "@swc/jest": "^0.2.26",
-    "@tsconfig/node16": "^16.1.0",
+    "@tsconfig/node18": "^18.2.4",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.2",
     "@types/prettier": "^2.7.3",
@@ -84,6 +85,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/eslint-plugin-tslint": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@vitest/coverage-v8": "^1.5.2",
     "cross-env": "^7.0.3",
     "deps-diff": "^1.0.2",
     "eslint": "^8.45.0",
@@ -109,10 +111,15 @@
     "rollup-plugin-swc3": "^0.9.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "tslib": "^2.6.2",
+    "vitest": "^1.5.2",
+    "vitest-tsconfig-paths": "^3.4.1"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["cross-env NODE_ENV=production eslint --cache"],
+    "*.{js,jsx,ts,tsx}": [
+      "cross-env NODE_ENV=production eslint --cache"
+    ],
     "*.{js,jsx,ts,tsx},*.json,.{eslintrc.cjs,prettierrc}": [
       "cross-env NODE_ENV=production prettier --ignore-path .eslintignore --parser json --write"
     ]

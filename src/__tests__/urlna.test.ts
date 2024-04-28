@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-console */
-import urlna from '..';
+import { urlna } from '..';
 
 test('emptyhost01.path.parameter.test', () => {
   const url = urlna('', '/hero/:hid/comic/:cid/name/:name', {

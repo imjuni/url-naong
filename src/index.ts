@@ -13,7 +13,7 @@ function join(host: string, pathname: string): string {
   return [host, removeEndSlash].join('/');
 }
 
-export default function urlna(
+export function urlna(
   host: string | undefined | null,
   pathname: string,
   params: Record<string, boolean | string | number | boolean[] | string[] | number[]>,
