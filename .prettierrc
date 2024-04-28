@@ -13,16 +13,9 @@
       }
     },
     {
-      "files": ".tjsclirc",
-      "options": {
-        "parser": "json5"
-      }
-    },
-    {
       "files": [
-        ".vscode/launch.json",
-        ".vscode/settings.json",
-        "tsconfig.prod.json",
+        ".vscode/**/*.json",
+        "tsconfig.*.json",
         "tsconfig.json"
       ],
       "options": {

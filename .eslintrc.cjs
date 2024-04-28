@@ -2,11 +2,11 @@ module.exports = {
   env: {
     es6: true,
     node: true,
-    browser: true,
   },
+  ignorePatterns: ['__test__/*', '__tests__/*', 'examples/*', 'coverage/*', 'dist/*'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['tsconfig.eslint.json'],
+    project: 'tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
   },
   extends: [
@@ -22,6 +22,31 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint', 'prettier', 'import'],
   rules: {
+    // ----------------------------------------------------------------------------------------------------------
+    // eslint
+    // ----------------------------------------------------------------------------------------------------------
+    'max-len': [
+      'error',
+      {
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreComments: true,
+        ignoreTrailingComments: true,
+        code: 120,
+      },
+    ],
+    'no-underscore-dangle': ['error', { allowAfterThis: true }],
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'TSEnumDeclaration:not([const=true])',
+        message: "Don't declare non-const enums",
+      },
+    ],
+    // ----------------------------------------------------------------------------------------------------------
+    // @typescript-eslint
+    // ----------------------------------------------------------------------------------------------------------
     '@typescript-eslint/naming-convention': [
       'error',
       {
@@ -61,54 +86,53 @@ module.exports = {
         argsIgnorePattern: '^_.+$',
       },
     ],
-    'max-len': [
+    '@typescript-eslint/consistent-type-imports': [
       'error',
       {
-        ignoreUrls: true,
-        ignoreStrings: true,
-        ignoreTemplateLiterals: true,
-        ignoreComments: true,
-        ignoreTrailingComments: true,
-        code: 120,
+        prefer: 'type-imports',
       },
     ],
-    'no-underscore-dangle': ['error', { allowAfterThis: true }],
-    'no-restricted-syntax': [
-      'error',
-      {
-        selector: 'TSEnumDeclaration:not([const=true])',
-        message: "Don't declare non-const enums",
-      },
-    ],
+    // ----------------------------------------------------------------------------------------------------------
+    // eslint-plugin-import
+    // ----------------------------------------------------------------------------------------------------------
+    'import/prefer-default-export': ['off'],
+    'import/no-default-export': ['error'],
   },
   overrides: [
     {
-      files: ['scripts/**/*.ts', 'scripts/**/*.cjs', 'jest.config.cjs'],
+      files: ['**/scripts/*.js'],
       rules: {
-        'import/no-extraneous-dependencies': ['off'],
-        '@typescript-eslint/no-unsafe-assignment': ['off'],
         'no-console': ['off'],
       },
     },
     {
-      files: ['src/configs/config.ts', 'src/tools/i18n/i18n.ts'],
+      files: ['**/CE_*.ts'],
       rules: {
-        '@typescript-eslint/no-unsafe-assignment': ['off'],
+        '@typescript-eslint/no-redeclare': ['off'],
+        '@typescript-eslint/naming-convention': ['off'],
       },
     },
     {
       files: ['**/__tests__/*.ts'],
       rules: {
         '@typescript-eslint/no-unsafe-assignment': ['off'],
+        '@typescript-eslint/no-unsafe-argument': ['off'],
+        '@typescript-eslint/no-unsafe-member-access': ['off'],
+        '@typescript-eslint/ban-ts-comment': ['off'],
         'no-console': ['off'],
+      },
+    },
+    {
+      files: ['vitest.config.ts'],
+      rules: {
+        'import/no-extraneous-dependencies': ['off'],
+        'import/no-default-export': ['off'],
       },
     },
   ],
   settings: {
     'import/resolver': {
       typescript: {
-        // always try to resolve types under `<root>@types` directory even it doesn't contain any source code,
-        // like `@types/unist`
         alwaysTryTypes: true,
         project: 'tsconfig.eslint.json',
       },
