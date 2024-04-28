@@ -105,3 +105,6 @@ dist
 
 # Wireit cache
 .wireit
+
+# Scripts
+git-short.sh
