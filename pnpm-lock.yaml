@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       path-to-regexp:
-        specifier: ^6.2.1
+        specifier: ^6.2.2
         version: 6.2.2
       qs:
-        specifier: ^6.11.2
+        specifier: ^6.12.1
         version: 6.12.1
     devDependencies:
       '@rollup/plugin-node-resolve':
