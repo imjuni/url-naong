@@ -1,9 +1,10 @@
 {
   "singleQuote": true,
   "trailingComma": "all",
-  "printWidth": 100,
+  "printWidth": 120,
   "arrowParens": "always",
   "parser": "typescript",
+  "plugins": ["prettier-plugin-organize-imports"],
   "endOfLine": "lf",
   "overrides": [
     {

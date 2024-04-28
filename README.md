@@ -7,9 +7,9 @@
 [![License](https://img.shields.io/npm/l/url-naong.svg)](https://github.com/imjuni/url-naong/blob/master/LICENSE)
 [![url-naong](https://circleci.com/gh/imjuni/url-naong.svg?style=shield)](https://app.circleci.com/pipelines/github/imjuni/url-naong?branch=master)
 
-url-naong is url builder that is inspired by [urlcat](https://github.com/balazsbotond/urlcat)
+`url-naong` is a simple url builder. The [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL) class is great, but it doesn't allow you to apply variables to pathnames and arrays to querystrings. This is where `url-naong` comes in handy. url-naong is url builder that is inspired by [urlcat](https://github.com/balazsbotond/urlcat)
 
-naong is korean name of Meowth(pokemon monster)
+naong is korean name of [Meowth(pokemon monster)](https://www.pokemon.com/us/pokedex/meowth)
 
 ## install
 
@@ -19,11 +19,44 @@ npm install url-naong --save
 
 ## Usage
 
-```ts
-const urlna = require('url-naong').default;
+`urlna` function take 4 parameters.
+
+1. (required) host
+2. (required) pathname
+3. (optional) path parameters and querystring
+4. (optional) options of the qs library
+
+### Variable in pathname
+
+```js
+const urlna = require('url-naong').urlna;
 
 const url = urlna(undefined, '/hero/:hid/comic/:cid/name/:name', 
-  { name: 'ironman', hid: 1, cid: 13, tid: '72368bb0-a6cc-4fa1-9288-c903fd45c333', }
+  { 
+    hid: 1, // evaluate in pathname
+    cid: 13, // evaluate in pathname
+    name: 'ironman', // evaluate in pathname
+    tid: '72368bb0-a6cc-4fa1-9288-c903fd45c333' // evaluate in querystring
+  }
+);
+
+console.log(url);
+
+// created> '/hero/1/comic/13/name/ironman?tid=72368bb0-a6cc-4fa1-9288-c903fd45c333'
+```
+
+### Querystring
+
+```js
+const urlna = require('url-naong').urlna;
+
+const url = urlna(undefined, '/hero/:hid/comic/:cid/name/:name', 
+  { 
+    hid: 1, // evaluate in pathname
+    cid: 13, // evaluate in pathname
+    name: 'ironman', // evaluate in pathname
+    tid: '72368bb0-a6cc-4fa1-9288-c903fd45c333' // evaluate in querystring
+  }
 );
 
 console.log(url);
@@ -34,7 +67,7 @@ console.log(url);
 ## TypeScript
 
 ```ts
-import urlna from 'url-naong';
+import { urlna } from 'url-naong';
 
 const url = urlna(undefined, '/hero/:hid/comic/:cid/name/:name', 
   { name: 'ironman', hid: 1, cid: 13, tid: '72368bb0-a6cc-4fa1-9288-c903fd45c333', }
