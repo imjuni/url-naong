@@ -27,7 +27,7 @@ export function urlna(
   option?: IStringifyOptions,
 ): string {
   // step 01. base url build
-  const emptyHost = host === undefined || host === null || host === '';
+  const emptyHost = host == null || host === '';
   const baseUrl = join(emptyHost ? 'http://localhost' : host, pathname);
   const url = new URL(baseUrl);
 

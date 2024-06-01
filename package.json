@@ -51,16 +51,18 @@
   "author": "ByungJoon Lee",
   "license": "MIT",
   "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.,js",
+  "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "require": {
-        "default": "./dist/cjs/index.cjs",
+      "import": {
+        "import": "./dist/esm/index.mjs",
+        "default": "./dist/esm/index.mjs",
         "types": "./dist/types/index.d.ts"
       },
-      "import": {
-        "default": "./dist/esm/index.mjs",
+      "require": {
+        "require": "./dist/cjs/index.cjs",
+        "default": "./dist/cjs/index.cjs",
         "types": "./dist/types/index.d.ts"
       }
     }
@@ -80,38 +82,38 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",
     "@tsconfig/node18": "^18.2.4",
-    "@types/node": "^20.4.2",
+    "@types/node": "^20.13.0",
     "@types/qs": "^6.9.7",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
-    "@vitest/coverage-v8": "^1.5.2",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vitest/coverage-v8": "^1.6.0",
     "cross-env": "^7.0.3",
     "deps-diff": "^1.0.2",
-    "esbuild": "^0.20.2",
-    "eslint": "^8.56.0",
+    "esbuild": "^0.21.4",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsdoc": "^48.2.3",
+    "eslint-plugin-jsdoc": "^48.2.7",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
+    "lint-staged": "^15.2.5",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.0",
     "prettier-eslint": "^16.3.0",
     "prettier-plugin-organize-imports": "^3.2.3",
     "read-pkg": "^5.2.0",
-    "rimraf": "^5.0.1",
-    "rollup": "^4.17.0",
-    "rollup-plugin-dts": "^6.1.0",
-    "tsc-alias": "^1.8.8",
+    "rimraf": "^5.0.7",
+    "rollup": "^4.18.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^4.2.0",
     "tslib": "^2.6.2",
     "typescript": "^5.4.5",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.5.2"
+    "vitest": "^1.6.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
