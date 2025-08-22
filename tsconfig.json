@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node20/tsconfig.json",
   "ts-node": {
     "transpileOnly": true,
     "files": true,
@@ -66,5 +66,5 @@
     // "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": ["src/**/*.ts"],
-  "exclude": [".eslintrc.cjs", "jest.config.cjs"]
+  "exclude": [".eslintrc.cjs", "eslint.config.mjs", "eslint.config.custom.mjs", "vitest.config.ts", "prepublish.js"]
 }
