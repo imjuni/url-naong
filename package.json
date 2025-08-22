@@ -56,14 +56,14 @@
   "exports": {
     ".": {
       "import": {
+        "types": "./dist/types/index.d.ts",
         "import": "./dist/esm/index.mjs",
-        "default": "./dist/esm/index.mjs",
-        "types": "./dist/types/index.d.ts"
+        "default": "./dist/esm/index.mjs"
       },
       "require": {
+        "types": "./dist/types/index.d.ts",
         "require": "./dist/cjs/index.cjs",
-        "default": "./dist/cjs/index.cjs",
-        "types": "./dist/types/index.d.ts"
+        "default": "./dist/cjs/index.cjs"
       }
     }
   },
