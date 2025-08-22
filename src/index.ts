@@ -1,4 +1,4 @@
-import { compile, pathToRegexp, type Key } from 'path-to-regexp';
+import { compile, pathToRegexp } from 'path-to-regexp';
 import qs, { type IStringifyOptions } from 'qs';
 
 function join(host: string, pathname: string): string {
@@ -9,6 +9,28 @@ function join(host: string, pathname: string): string {
     : removeStartSlash;
 
   return [host, removeEndSlash].join('/');
+}
+
+function elementStringify(values?: boolean | string | number | boolean[] | string[] | number[] | null) {
+  if (values == null) {
+    return values;
+  }
+
+  if (Array.isArray(values)) {
+    const first = values.at(0);
+
+    if (typeof first === 'string') {
+      return values;
+    }
+
+    return values.map((v) => `${v}`);
+  }
+
+  if (typeof values !== 'string') {
+    return `${values}`;
+  }
+
+  return values;
 }
 
 /**
@@ -23,7 +45,7 @@ function join(host: string, pathname: string): string {
 export function urlna(
   host: string | undefined | null,
   pathname: string,
-  params?: Record<string, boolean | string | number | boolean[] | string[] | number[]>,
+  params?: Record<string, boolean | string | number | boolean[] | string[] | number[] | undefined | null>,
   option?: IStringifyOptions,
 ): string {
   // step 01. base url build
@@ -32,14 +54,19 @@ export function urlna(
   const url = new URL(baseUrl);
 
   // step 02. path parameter evaluation using path-to-regexp
-  const pathKeys: Key[] = [];
-
-  pathToRegexp(url.pathname, pathKeys);
+  const { keys: pathKeys } = pathToRegexp(url.pathname);
 
   const keys = pathKeys.map((pathKey) => pathKey.name);
   const builder = compile(url.pathname, {});
+  const pathParams = (Object.keys(params ?? {}) as (keyof typeof params)[]).reduce<Record<string, string | string[]>>(
+    (aggregated, key) => {
+      const value = elementStringify(params?.[key]);
+      return { ...aggregated, [key]: value };
+    },
+    { ...params } as Record<string, string | string[]>,
+  );
 
-  const evaluatedUrl = builder(params);
+  const evaluatedUrl = builder(pathParams);
   url.pathname = evaluatedUrl;
 
   // step 03. query string build
@@ -47,9 +74,7 @@ export function urlna(
     params != null
       ? Object.entries(params)
           .filter(([key]) => !keys.includes(key))
-          .reduce<Record<string, unknown>>((aggregation, [key, value]) => {
-            return { ...aggregation, [key]: value };
-          }, {})
+          .reduce<Record<string, unknown>>((aggregation, [key, value]) => ({ ...aggregation, [key]: value }), {})
       : {};
 
   const queryStringStringified = qs.stringify(queryObject, option);
@@ -58,5 +83,5 @@ export function urlna(
     return `${emptyHost ? url.pathname : url.href}?${queryStringStringified}`;
   }
 
-  return `${emptyHost ? url.pathname : url.href}`;
+  return emptyHost ? url.pathname : url.href;
 }
